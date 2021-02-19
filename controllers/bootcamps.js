@@ -62,7 +62,7 @@ exports.createBootcamp = asyncHandler(async (req, res, next) => {
 // @route PUT /api/v1/bootcamps/:id
 // @access private
 exports.updateBootcamp = asyncHandler(async (req, res, next) => {
-    let bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id);
+    let bootcamp = await Bootcamp.findBy(req.params.id);
 
     if (!bootcamp) {
         return next(
@@ -77,7 +77,7 @@ exports.updateBootcamp = asyncHandler(async (req, res, next) => {
     if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
         return next(
             new ErrorResponse(
-                `User ${req.user.id} is not authorized to update this bootcamp`
+                `User ${req.user.id} is not authorized to update this bootcamp`, 401
             )
         );
     }
@@ -109,7 +109,7 @@ exports.deleteBootcamp = asyncHandler(async (req, res, next) => {
     if (bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
         return next(
             new ErrorResponse(
-                `User ${req.user.id} is not authorized to delete this bootcamp`
+                `User ${req.user.id} is not authorized to delete this bootcamp`, 401
             )
         );
     }
