@@ -26,6 +26,14 @@
     "slugify": "^1.4.6"
   },
   "devDependencies": {
-    "nodemon": "^2.0.6"
-  }
+    "nodemon": "^2.0.15"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timbohmert/udemy_node_course.git"
+  },
+  "bugs": {
+    "url": "https://github.com/timbohmert/udemy_node_course/issues"
+  },
+  "homepage": "https://github.com/timbohmert/udemy_node_course#readme"
 }
