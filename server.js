@@ -35,7 +35,7 @@ app.use(cookieParser());
 
 // dev logging middleware (using morgan)
 if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 // file upload
@@ -51,17 +51,19 @@ app.use(helmet());
 app.use(xss());
 
 // limiting request rates
-const limiter= rateLimit({
-    window: 10 * 60 * 1000, //10 min window
-    max: 100 // 100 request
+const limiter = rateLimit({
+  window: 10 * 60 * 1000, //10 min window
+  max: 100 // 100 request
 });
 app.use(limiter);
 
 // protection against http param pollution
-app.use(hpp());
+//need to turn this back on
+//app.use(hpp());
 
 // cross-origin resource sharing
-app.use(cors());
+//need to turn this back on
+//app.use(cors());
 
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
@@ -78,15 +80,15 @@ app.use(errorHandler);
 const PORT = process.env.PORT;
 
 const server = app.listen(PORT, () => {
-    console.log(
-        `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`.yellow
-            .bold
-    );
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+      .yellow.bold
+  );
 });
 
 // handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
-    console.log(`Error: ${err.message}`.red);
-    // close server & exit process
-    server.close(() => process.exit(1));
+  console.log(`Error: ${err.message}`.red);
+  // close server & exit process
+  server.close(() => process.exit(1));
 });
